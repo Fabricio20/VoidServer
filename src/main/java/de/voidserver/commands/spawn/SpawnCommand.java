@@ -1,6 +1,8 @@
 package de.voidserver.commands.spawn;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +15,13 @@ public class SpawnCommand implements CommandExecutor {
         if (sender instanceof Player player) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&',
                     "&aTeleporting.."));
-            player.teleport(player.getWorld().getSpawnLocation());
+            World world = Bukkit.getWorld("world");
+            if (world == null) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                        "&cMain world not found.."));
+                return true;
+            }
+            player.teleport(world.getSpawnLocation());
         } else {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                     "&cThis command is only available to players."));
