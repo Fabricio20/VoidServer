@@ -6,9 +6,12 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class WarpCommand implements CommandExecutor {
+import java.util.List;
+
+public class WarpCommand implements CommandExecutor, TabCompleter {
 
     private final WarpManager manager;
 
@@ -39,6 +42,18 @@ public class WarpCommand implements CommandExecutor {
             return true;
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            return null;
+        } else if (!command.getName().equalsIgnoreCase("warp")
+                && !command.getName().equalsIgnoreCase("warps")) {
+            return null;
+        }
+        return this.manager.list().stream()
+                .toList();
     }
 
 }

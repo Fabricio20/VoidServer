@@ -29,12 +29,20 @@ public class VoidServer extends JavaPlugin {
     @Override
     public void onEnable() {
         HomeManager homeManager = new HomeManager(this.configManager);
-        this.getCommand("home").setExecutor(new HomeCommand(homeManager));
+
+        HomeCommand homeCommand = new HomeCommand(homeManager);
+        this.getCommand("home").setExecutor(homeCommand);
+        this.getCommand("home").setTabCompleter(homeCommand);
+
         this.getCommand("sethome").setExecutor(new SetHomeCommand(homeManager));
         this.getCommand("delhome").setExecutor(new DelHomeCommand(homeManager));
 
         WarpManager warpManager = new WarpManager(this.configManager);
-        this.getCommand("warp").setExecutor(new WarpCommand(warpManager));
+
+        WarpCommand warpCommand = new WarpCommand(warpManager);
+        this.getCommand("warp").setExecutor(warpCommand);
+        this.getCommand("warp").setTabCompleter(warpCommand);
+
         this.getCommand("setwarp").setExecutor(new SetWarpCommand(warpManager));
         this.getCommand("delwarp").setExecutor(new DelWarpCommand(warpManager));
 

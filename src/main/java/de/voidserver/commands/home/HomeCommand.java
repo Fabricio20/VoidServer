@@ -6,9 +6,12 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class HomeCommand implements CommandExecutor {
+import java.util.List;
+
+public class HomeCommand implements CommandExecutor, TabCompleter {
 
     private final HomeManager manager;
 
@@ -39,6 +42,18 @@ public class HomeCommand implements CommandExecutor {
             return true;
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player player)) {
+            return null;
+        } else if (!command.getName().equalsIgnoreCase("home")
+                && !command.getName().equalsIgnoreCase("homes")) {
+            return null;
+        }
+        return this.manager.list(player).stream()
+                .toList();
     }
 
 }
