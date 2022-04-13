@@ -1,0 +1,41 @@
+main: de.voidserver.VoidServer
+name: VoidServer
+version: '1.0'
+api-version: 1.18
+commands:
+  delhome:
+    description: Deletes a home.
+    usage: "/<command> <name>"
+  home:
+    description: Lists or teleports to a home.
+    usage: "/<command> [name]"
+    aliases:
+      - homes
+  sethome:
+    description: Defines a new home.
+    usage: "/<command> <name>"
+  setspawn:
+    description: Update the world's spawnpoint.
+    usage: "/<command>"
+    permission: "voidserver.setspawn"
+  spawn:
+    description: Teleports to the spawn.
+    usage: "/<command>"
+  delwarp:
+    description: Deletes a warp.
+    usage: "/<command> <name>"
+  warp:
+    description: Lists or teleports to a warp.
+    usage: "/<command> [name]"
+    aliases:
+      - homes
+  setwarp:
+    description: Defines a new warp.
+    usage: "/<command> <name>"
+  back:
+    description: Teleports to your last location.
+    usage: "/<command>"
+permissions:
+  voidserver.setspawn:
+    description: Permission to update the spawn location.
+    default: op
